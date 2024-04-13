@@ -6,21 +6,21 @@ namespace PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules;
 
 use PhPhD\ExceptionalValidation\Assembler\CaptureRuleSetAssembler;
 use PhPhD\ExceptionalValidation\Assembler\CaptureRuleSetAssemblerEnvelope;
-use PhPhD\ExceptionalValidation\Assembler\Object\ObjectRuleSetAssembler;
+use PhPhD\ExceptionalValidation\Assembler\Object\IterableOfObjectsRuleSetAssembler;
 use PhPhD\ExceptionalValidation\Model\Rule\CaptureRule;
 use Symfony\Component\Validator\Constraints\Valid;
 
-use function is_object;
+use function is_iterable;
 
 /**
  * @internal
  *
  * @implements CaptureRuleSetAssembler<PropertyRulesAssemblerEnvelope>
  */
-final class PropertyNestedValidObjectRuleAssembler implements CaptureRuleSetAssembler
+final class PropertyNestedValidIterableRulesAssembler implements CaptureRuleSetAssembler
 {
     public function __construct(
-        private readonly ObjectRuleSetAssembler $objectRuleSetAssembler,
+        private readonly IterableOfObjectsRuleSetAssembler $iterableObjectsRuleSetAssembler,
     ) {
     }
 
@@ -29,7 +29,7 @@ final class PropertyNestedValidObjectRuleAssembler implements CaptureRuleSetAsse
     {
         $propertyValue = $parent->getValue();
 
-        if (!is_object($propertyValue)) {
+        if (!is_iterable($propertyValue)) {
             return null;
         }
 
@@ -39,6 +39,6 @@ final class PropertyNestedValidObjectRuleAssembler implements CaptureRuleSetAsse
             return null;
         }
 
-        return $this->objectRuleSetAssembler->assemble($propertyValue, $parent);
+        return $this->iterableObjectsRuleSetAssembler->assemble($propertyValue, $parent);
     }
 }
