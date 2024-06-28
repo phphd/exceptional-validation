@@ -18,7 +18,7 @@ use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyNe
 use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyNestedValidObjectRuleAssembler;
 use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyRulesAssemblerEnvelope;
 use PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationFormatter;
-use PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationsListFormatter;
+use PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationListFormatter;
 use PhPhD\ExceptionalValidation\Handler\Exception\ExceptionalValidationFailedException;
 use PhPhD\ExceptionalValidation\Handler\ExceptionalHandler;
 use PhPhD\ExceptionalValidation\Tests\Stub\Exception\ConditionallyCapturedException;
@@ -41,7 +41,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @covers \PhPhD\ExceptionalValidation\Capture
  * @covers \PhPhD\ExceptionalValidation\Handler\ExceptionalHandler
  * @covers \PhPhD\ExceptionalValidation\Handler\Exception\ExceptionalValidationFailedException
- * @covers \PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationsListFormatter
+ * @covers \PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationListFormatter
  * @covers \PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationFormatter
  * @covers \PhPhD\ExceptionalValidation\Model\Rule\ObjectRuleSet
  * @covers \PhPhD\ExceptionalValidation\Model\Rule\IterableItemCaptureRule
@@ -54,7 +54,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\CompositeMatchCondition
  * @covers \PhPhD\ExceptionalValidation\Model\ValueObject\CaughtException
  * @covers \PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath
- * @covers \PhPhD\ExceptionalValidation\Model\ValueObject\ThrownExceptions
+ * @covers \PhPhD\ExceptionalValidation\Model\Dto\ThrownExceptionPackage
  * @covers \PhPhD\ExceptionalValidation\Assembler\CompositeRuleSetAssembler
  * @covers \PhPhD\ExceptionalValidation\Assembler\Object\ObjectRuleSetAssembler
  * @covers \PhPhD\ExceptionalValidation\Assembler\Object\Rules\ObjectRulesAssemblerEnvelope
@@ -99,7 +99,7 @@ final class ExceptionalValidationTest extends TestCase
         $captureListAssemblers->append(new PropertyNestedValidIterableRulesAssembler(new IterableOfObjectsRuleSetAssembler($objectRuleSetAssembler)));
 
         $formatter = new ExceptionalViolationFormatter($translator, 'domain');
-        $listFormatter = new ExceptionalViolationsListFormatter($formatter);
+        $listFormatter = new ExceptionalViolationListFormatter($formatter);
         $this->exceptionHandler = new ExceptionalHandler($objectRuleSetAssembler, $listFormatter);
     }
 

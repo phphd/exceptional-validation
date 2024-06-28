@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhPhD\ExceptionalValidation\Model\Rule;
 
+use PhPhD\ExceptionalValidation\Model\Dto\ThrownExceptionPackage;
 use PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath;
-use PhPhD\ExceptionalValidation\Model\ValueObject\ThrownExceptions;
 
 use function array_merge;
 
@@ -19,12 +19,12 @@ final class CompositeRuleSet implements CaptureRule
     ) {
     }
 
-    public function capture(ThrownExceptions $thrownExceptions): array
+    public function capture(ThrownExceptionPackage $exceptions): array
     {
         $hits = [];
 
         foreach ($this->rules as $rule) {
-            $hits[] = $rule->capture($thrownExceptions);
+            $hits[] = $rule->capture($exceptions);
         }
 
         return array_merge(...$hits);

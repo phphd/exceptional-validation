@@ -7,7 +7,7 @@ namespace PhPhD\ExceptionalValidation\Formatter;
 use PhPhD\ExceptionalValidation\Model\ValueObject\CaughtException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
-interface ExceptionViolationsListFormatter
+interface ExceptionViolationListFormatter
 {
     /** @param non-empty-list<CaughtException> $caughtExceptions */
     public function formatViolations(array $caughtExceptions): ConstraintViolationListInterface;
