@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PhPhD\ExceptionalValidation\Model\Rule;
 
 use LogicException;
-use PhPhD\ExceptionalValidation\Model\Dto\ThrownExceptionPackage;
+use PhPhD\ExceptionalValidation\Model\Exception\ExceptionPackage;
 use PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath;
 
 use function is_object;
@@ -19,9 +19,9 @@ final class IterableItemCaptureRule implements CaptureRule
     ) {
     }
 
-    public function capture(ThrownExceptionPackage $exceptions): array
+    public function evaluate(ExceptionPackage $exceptions): bool
     {
-        return $this->objectRuleSet->capture($exceptions);
+        return $this->objectRuleSet->evaluate($exceptions);
     }
 
     public function getPropertyPath(): PropertyPath

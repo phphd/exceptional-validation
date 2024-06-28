@@ -28,17 +28,13 @@ final class ExceptionalHandler implements ExceptionHandler
             throw $exception;
         }
 
-        $thrownExceptions = $this->exceptionPackageCollector->collect($exception);
+        $exceptionPackage = $this->exceptionPackageCollector->collect($exception);
 
-        $caughtExceptions = $ruleSet->capture($thrownExceptions);
-
-        if (count($thrownExceptions) === count($caughtExceptions)) {
-            // the condition is always false
-        }
-
-        if ([] === $caughtExceptions) {
+        if (!$ruleSet->evaluate($exceptionPackage)) {
             throw $exception;
         }
+
+        $caughtExceptions = $exceptionPackage->getCaughtExceptions();
 
         $violationList = $this->violationsFormatter->formatViolations($caughtExceptions);
 

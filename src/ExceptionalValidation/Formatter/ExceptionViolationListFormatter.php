@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhPhD\ExceptionalValidation\Formatter;
 
-use PhPhD\ExceptionalValidation\Model\ValueObject\CaughtException;
+use PhPhD\ExceptionalValidation\Model\Exception\CaughtException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 interface ExceptionViolationListFormatter

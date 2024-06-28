@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PhPhD\ExceptionalValidation\Collector;
 
-use PhPhD\ExceptionalValidation\Model\Dto\ThrownExceptionPackage;
+use PhPhD\ExceptionalValidation\Model\Exception\ExceptionPackage;
 use Throwable;
 
 final class SingleExceptionPackageCollector implements ExceptionPackageCollector
 {
-    public function collect(Throwable $exception): ThrownExceptionPackage
+    public function collect(Throwable $exception): ExceptionPackage
     {
-        return ThrownExceptionPackage::fromTheException($exception);
+        return ExceptionPackage::fromTheException($exception);
     }
 }

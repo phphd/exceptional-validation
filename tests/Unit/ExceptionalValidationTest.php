@@ -52,9 +52,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\MatchByExceptionClassCondition
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\MatchWithClosureCondition
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\CompositeMatchCondition
- * @covers \PhPhD\ExceptionalValidation\Model\ValueObject\CaughtException
+ * @covers \PhPhD\ExceptionalValidation\Model\Exception\CaughtException
  * @covers \PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath
- * @covers \PhPhD\ExceptionalValidation\Model\Dto\ThrownExceptionPackage
+ * @covers \PhPhD\ExceptionalValidation\Model\Exception\ExceptionPackage
  * @covers \PhPhD\ExceptionalValidation\Assembler\CompositeRuleSetAssembler
  * @covers \PhPhD\ExceptionalValidation\Assembler\Object\ObjectRuleSetAssembler
  * @covers \PhPhD\ExceptionalValidation\Assembler\Object\Rules\ObjectRulesAssemblerEnvelope

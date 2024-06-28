@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PhPhD\ExceptionalValidation\Model\Rule;
 
-use PhPhD\ExceptionalValidation\Model\Dto\ThrownExceptionPackage;
+use PhPhD\ExceptionalValidation\Model\Exception\ExceptionPackage;
 use PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath;
-
-use function array_merge;
 
 /** @internal */
 final class CompositeRuleSet implements CaptureRule
@@ -19,15 +17,15 @@ final class CompositeRuleSet implements CaptureRule
     ) {
     }
 
-    public function capture(ThrownExceptionPackage $exceptions): array
+    public function evaluate(ExceptionPackage $exceptions): bool
     {
-        $hits = [];
-
         foreach ($this->rules as $rule) {
-            $hits[] = $rule->capture($exceptions);
+            if ($rule->evaluate($exceptions)) {
+                return true;
+            }
         }
 
-        return array_merge(...$hits);
+        return false;
     }
 
     public function getPropertyPath(): PropertyPath
