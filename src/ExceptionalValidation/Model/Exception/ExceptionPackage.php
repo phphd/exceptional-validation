@@ -6,6 +6,7 @@ namespace PhPhD\ExceptionalValidation\Model\Exception;
 
 use PhPhD\ExceptionalValidation\Model\Rule\CaptureExceptionRule;
 use Throwable;
+use Webmozart\Assert\Assert;
 
 final class ExceptionPackage
 {
@@ -13,24 +14,20 @@ final class ExceptionPackage
     private array $remainingExceptions;
 
     /** @var list<ProcessedException> */
-    private array $processedExceptions;
+    private array $processedExceptions = [];
 
-    public function __construct(
-        /** @var list<Throwable> */
-        private readonly array $thrownExceptions,
-    ) {
-        $this->remainingExceptions = $this->thrownExceptions;
+    /** @param list<Throwable> $thrownExceptions */
+    public function __construct(array $thrownExceptions)
+    {
+        $this->remainingExceptions = $thrownExceptions;
     }
 
-    /** @return list<ProcessedException> */
+    /** @return non-empty-list<ProcessedException> */
     public function getProcessedExceptions(): array
     {
-        return $this->processedExceptions;
-    }
+        Assert::notEmpty($this->processedExceptions);
 
-    public static function fromTheException(Throwable $exception): self
-    {
-        return new self([$exception]);
+        return $this->processedExceptions;
     }
 
     public function isProcessed(): bool
