@@ -30,13 +30,13 @@ final class ExceptionalHandler implements ExceptionHandler
 
         $exceptionPackage = $this->exceptionPackageCollector->collect($exception);
 
-        if (!$ruleSet->evaluate($exceptionPackage)) {
+        if (!$ruleSet->process($exceptionPackage)) {
             throw $exception;
         }
 
-        $caughtExceptions = $exceptionPackage->getCaughtExceptions();
+        $processedExceptions = $exceptionPackage->getProcessedExceptions();
 
-        $violationList = $this->violationsFormatter->formatViolations($caughtExceptions);
+        $violationList = $this->violationsFormatter->formatViolations($processedExceptions);
 
         throw new ExceptionalValidationFailedException($message, $violationList, $exception);
     }

@@ -19,9 +19,9 @@ final class IterableItemCaptureRule implements CaptureRule
     ) {
     }
 
-    public function evaluate(ExceptionPackage $exceptions): bool
+    public function process(ExceptionPackage $exceptions): bool
     {
-        return $this->objectRuleSet->evaluate($exceptions);
+        return $this->objectRuleSet->process($exceptions);
     }
 
     public function getPropertyPath(): PropertyPath

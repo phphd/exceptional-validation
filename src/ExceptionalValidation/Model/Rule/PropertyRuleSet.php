@@ -18,9 +18,9 @@ final class PropertyRuleSet implements CaptureRule
     ) {
     }
 
-    public function evaluate(ExceptionPackage $exceptions): bool
+    public function process(ExceptionPackage $exceptions): bool
     {
-        return $this->ruleSet->evaluate($exceptions);
+        return $this->ruleSet->process($exceptions);
     }
 
     public function getPropertyPath(): PropertyPath

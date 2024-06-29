@@ -19,9 +19,9 @@ final class CaptureExceptionRule implements CaptureRule, MatchCondition
     ) {
     }
 
-    public function evaluate(ExceptionPackage $exceptions): bool
+    public function process(ExceptionPackage $exceptions): bool
     {
-        $exceptions->captureWith($this);
+        $exceptions->processRule($this);
 
         return $exceptions->isProcessed();
     }

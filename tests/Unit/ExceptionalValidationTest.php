@@ -17,6 +17,7 @@ use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyCa
 use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyNestedValidIterableRulesAssembler;
 use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyNestedValidObjectRuleAssembler;
 use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyRulesAssemblerEnvelope;
+use PhPhD\ExceptionalValidation\Collector\SingleExceptionPackageCollector;
 use PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationFormatter;
 use PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationListFormatter;
 use PhPhD\ExceptionalValidation\Handler\Exception\ExceptionalValidationFailedException;
@@ -52,7 +53,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\MatchByExceptionClassCondition
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\MatchWithClosureCondition
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\CompositeMatchCondition
- * @covers \PhPhD\ExceptionalValidation\Model\Exception\CaughtException
+ * @covers \PhPhD\ExceptionalValidation\Model\Exception\ProcessedException
  * @covers \PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath
  * @covers \PhPhD\ExceptionalValidation\Model\Exception\ExceptionPackage
  * @covers \PhPhD\ExceptionalValidation\Assembler\CompositeRuleSetAssembler
@@ -98,9 +99,11 @@ final class ExceptionalValidationTest extends TestCase
         $captureListAssemblers->append(new PropertyNestedValidObjectRuleAssembler($objectRuleSetAssembler));
         $captureListAssemblers->append(new PropertyNestedValidIterableRulesAssembler(new IterableOfObjectsRuleSetAssembler($objectRuleSetAssembler)));
 
-        $formatter = new ExceptionalViolationFormatter($translator, 'domain');
-        $listFormatter = new ExceptionalViolationListFormatter($formatter);
-        $this->exceptionHandler = new ExceptionalHandler($objectRuleSetAssembler, $listFormatter);
+        $exceptionPackageCollector = new SingleExceptionPackageCollector();
+
+        $violationFormatter = new ExceptionalViolationFormatter($translator, 'domain');
+        $violationListFormatter = new ExceptionalViolationListFormatter($violationFormatter);
+        $this->exceptionHandler = new ExceptionalHandler($objectRuleSetAssembler, $exceptionPackageCollector, $violationListFormatter);
     }
 
     public function testDoesNotCaptureExceptionForMessageNotHavingExceptionalValidationAttribute(): never

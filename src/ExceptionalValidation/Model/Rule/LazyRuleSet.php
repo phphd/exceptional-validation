@@ -19,9 +19,9 @@ final class LazyRuleSet implements CaptureRule
     ) {
     }
 
-    public function evaluate(ExceptionPackage $exceptions): bool
+    public function process(ExceptionPackage $exceptions): bool
     {
-        return $this->innerRule()->evaluate($exceptions);
+        return $this->innerRule()->process($exceptions);
     }
 
     public function getPropertyPath(): PropertyPath

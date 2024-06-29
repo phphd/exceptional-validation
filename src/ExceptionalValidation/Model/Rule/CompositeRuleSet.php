@@ -17,10 +17,10 @@ final class CompositeRuleSet implements CaptureRule
     ) {
     }
 
-    public function evaluate(ExceptionPackage $exceptions): bool
+    public function process(ExceptionPackage $exceptions): bool
     {
         foreach ($this->rules as $rule) {
-            if ($rule->evaluate($exceptions)) {
+            if ($rule->process($exceptions)) {
                 return true;
             }
         }

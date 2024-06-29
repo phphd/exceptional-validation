@@ -9,7 +9,7 @@ use PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath;
 
 interface CaptureRule
 {
-    public function evaluate(ExceptionPackage $exceptions): bool;
+    public function process(ExceptionPackage $exceptions): bool;
 
     public function getPropertyPath(): PropertyPath;
 
