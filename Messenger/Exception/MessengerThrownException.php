@@ -9,7 +9,7 @@ use RuntimeException;
 use Symfony\Component\Messenger\Exception\WrappedExceptionsInterface;
 use Throwable;
 
-final class MessengerThrownExceptionAdapter extends RuntimeException implements ThrownException
+final class MessengerThrownException extends RuntimeException implements ThrownException
 {
     public function __construct(
         private readonly WrappedExceptionsInterface&Throwable $exception,

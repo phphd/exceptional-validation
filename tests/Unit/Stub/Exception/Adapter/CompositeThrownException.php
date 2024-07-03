@@ -9,7 +9,7 @@ use RuntimeException;
 use Throwable;
 
 /** @internal */
-final class CompositeException extends RuntimeException implements ThrownException
+final class CompositeThrownException extends RuntimeException implements ThrownException
 {
     public function __construct(
         /** @var list<Throwable> */

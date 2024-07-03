@@ -6,8 +6,8 @@ namespace PhPhD\ExceptionalValidationBundle\Messenger;
 
 use Exception;
 use PhPhD\ExceptionalValidation\Handler\ExceptionHandler;
-use PhPhD\ExceptionalValidation\Model\Exception\Adapter\SingleThrownExceptionAdapter;
-use PhPhD\ExceptionalValidationBundle\Messenger\Exception\MessengerThrownExceptionAdapter;
+use PhPhD\ExceptionalValidation\Model\Exception\Adapter\SingleThrownException;
+use PhPhD\ExceptionalValidationBundle\Messenger\Exception\MessengerThrownException;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\WrappedExceptionsInterface;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
@@ -32,11 +32,11 @@ final class ExceptionalValidationMiddleware implements MiddlewareInterface
         } catch (WrappedExceptionsInterface $exception) {
             /** @var WrappedExceptionsInterface&Throwable $exception */
 
-            $thrownException = new MessengerThrownExceptionAdapter($exception);
+            $thrownException = new MessengerThrownException($exception);
 
             $this->exceptionHandler->capture($message, $thrownException);
         } catch (Exception $exception) {
-            $thrownException = new SingleThrownExceptionAdapter($exception);
+            $thrownException = new SingleThrownException($exception);
 
             $this->exceptionHandler->capture($message, $thrownException);
         }

@@ -8,7 +8,7 @@ use RuntimeException;
 use Throwable;
 
 /** @api */
-final class SingleThrownExceptionAdapter extends RuntimeException implements ThrownException
+final class SingleThrownException extends RuntimeException implements ThrownException
 {
     public function __construct(
         private readonly Throwable $exception,
