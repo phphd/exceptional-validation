@@ -205,9 +205,7 @@ The key idea involves using some kind of `CompositeException` that represents an
 Here is an example of how you can achieve this:
 
 ```php
-use PhPhD\ExceptionalValidation;
-use PhPhD\ExceptionalValidation\Capture;
-use PhPhD\ExceptionalValidation\Collector\Exception\CompositeException;
+use PhPhD\ExceptionalValidation;use PhPhD\ExceptionalValidation\Capture;
 
 #[ExceptionalValidation]
 final class RegisterUserCommand

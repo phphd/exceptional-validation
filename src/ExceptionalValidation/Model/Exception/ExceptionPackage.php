@@ -8,26 +8,26 @@ use PhPhD\ExceptionalValidation\Model\Rule\CaptureExceptionRule;
 use Throwable;
 use Webmozart\Assert\Assert;
 
+/** @internal */
 final class ExceptionPackage
 {
     /** @var array<int,Throwable> */
     private array $remainingExceptions;
 
-    /** @var list<ProcessedException> */
-    private array $processedExceptions = [];
+    /** @var list<CapturedException> */
+    private array $capturedExceptions = [];
 
-    /** @param list<Throwable> $thrownExceptions */
-    public function __construct(array $thrownExceptions)
+    public function __construct(ThrownException $exception)
     {
-        $this->remainingExceptions = $thrownExceptions;
+        $this->remainingExceptions = $exception->getExceptions();
     }
 
-    /** @return non-empty-list<ProcessedException> */
-    public function getProcessedExceptions(): array
+    /** @return non-empty-list<CapturedException> */
+    public function getCapturedExceptions(): array
     {
-        Assert::notEmpty($this->processedExceptions);
+        Assert::notEmpty($this->capturedExceptions);
 
-        return $this->processedExceptions;
+        return $this->capturedExceptions;
     }
 
     public function isProcessed(): bool
@@ -39,17 +39,17 @@ final class ExceptionPackage
     {
         foreach ($this->remainingExceptions as $index => $exception) {
             if ($rule->matches($exception)) {
-                $this->processException($index, $exception, $rule);
+                $this->captureException($index, $exception, $rule);
 
                 return;
             }
         }
     }
 
-    private function processException(int $index, Throwable $exception, CaptureExceptionRule $rule): void
+    private function captureException(int $index, Throwable $exception, CaptureExceptionRule $rule): void
     {
         unset($this->remainingExceptions[$index]);
 
-        $this->processedExceptions[] = new ProcessedException($exception, $rule);
+        $this->capturedExceptions[] = new CapturedException($exception, $rule);
     }
 }

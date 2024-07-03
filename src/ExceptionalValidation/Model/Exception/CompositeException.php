@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PhPhD\ExceptionalValidation\Collector\Exception;
+namespace PhPhD\ExceptionalValidation\Model\Exception;
 
 use RuntimeException;
 use Throwable;
 
-final class CompositeException extends RuntimeException
+/** @api */
+final class CompositeException extends RuntimeException implements ThrownException
 {
     public function __construct(
         /** @var list<Throwable> */
@@ -19,7 +20,6 @@ final class CompositeException extends RuntimeException
         parent::__construct($message, $code, $previous);
     }
 
-    /** @return list<Throwable> */
     public function getExceptions(): array
     {
         return $this->exceptions;

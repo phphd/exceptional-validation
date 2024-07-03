@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhPhD\ExceptionalValidation\Formatter;
 
-use PhPhD\ExceptionalValidation\Model\Exception\ProcessedException;
+use PhPhD\ExceptionalValidation\Model\Exception\CapturedException;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -16,13 +16,13 @@ final class ExceptionalViolationListFormatter implements ExceptionViolationListF
     ) {
     }
 
-    /** @param non-empty-list<ProcessedException> $processedExceptions */
-    public function formatViolations(array $processedExceptions): ConstraintViolationListInterface
+    /** @param non-empty-list<CapturedException> $capturedExceptions */
+    public function formatViolations(array $capturedExceptions): ConstraintViolationListInterface
     {
         $violations = new ConstraintViolationList();
 
-        foreach ($processedExceptions as $processedException) {
-            $violation = $this->violationFormatter->formatViolation($processedException);
+        foreach ($capturedExceptions as $capturedException) {
+            $violation = $this->violationFormatter->formatViolation($capturedException);
 
             $violations->add($violation);
         }

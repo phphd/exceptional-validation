@@ -5,38 +5,37 @@ declare(strict_types=1);
 namespace PhPhD\ExceptionalValidation\Handler;
 
 use PhPhD\ExceptionalValidation\Assembler\Object\ObjectRuleSetAssembler;
-use PhPhD\ExceptionalValidation\Collector\ExceptionPackageCollector;
 use PhPhD\ExceptionalValidation\Formatter\ExceptionViolationListFormatter;
 use PhPhD\ExceptionalValidation\Handler\Exception\ExceptionalValidationFailedException;
-use Throwable;
+use PhPhD\ExceptionalValidation\Model\Exception\ExceptionPackage;
+use PhPhD\ExceptionalValidation\Model\Exception\ThrownException;
 
 /** @internal */
 final class ExceptionalHandler implements ExceptionHandler
 {
     public function __construct(
         private readonly ObjectRuleSetAssembler $ruleSetAssembler,
-        private readonly ExceptionPackageCollector $exceptionPackageCollector,
         private readonly ExceptionViolationListFormatter $violationsFormatter,
     ) {
     }
 
-    public function capture(object $message, Throwable $exception): never
+    public function capture(object $message, ThrownException $exception): void
     {
         $ruleSet = $this->ruleSetAssembler->assemble($message);
 
         if (null === $ruleSet) {
-            throw $exception;
+            return;
         }
 
-        $exceptionPackage = $this->exceptionPackageCollector->collect($exception);
+        $exceptionPackage = new ExceptionPackage($exception);
 
         if (!$ruleSet->process($exceptionPackage)) {
-            throw $exception;
+            return;
         }
 
-        $processedExceptions = $exceptionPackage->getProcessedExceptions();
+        $capturedExceptions = $exceptionPackage->getCapturedExceptions();
 
-        $violationList = $this->violationsFormatter->formatViolations($processedExceptions);
+        $violationList = $this->violationsFormatter->formatViolations($capturedExceptions);
 
         throw new ExceptionalValidationFailedException($message, $violationList, $exception);
     }

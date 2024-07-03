@@ -10,6 +10,7 @@ use PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath;
 
 use function is_object;
 
+/** @internal */
 final class IterableItemCaptureRule implements CaptureRule
 {
     public function __construct(

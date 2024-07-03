@@ -17,12 +17,12 @@ use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyCa
 use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyNestedValidIterableRulesAssembler;
 use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyNestedValidObjectRuleAssembler;
 use PhPhD\ExceptionalValidation\Assembler\Object\Rules\Property\Rules\PropertyRulesAssemblerEnvelope;
-use PhPhD\ExceptionalValidation\Collector\Exception\CompositeException;
 use PhPhD\ExceptionalValidation\Collector\ExceptionalPackageCollector;
 use PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationFormatter;
 use PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationListFormatter;
 use PhPhD\ExceptionalValidation\Handler\Exception\ExceptionalValidationFailedException;
 use PhPhD\ExceptionalValidation\Handler\ExceptionalHandler;
+use PhPhD\ExceptionalValidation\Model\Exception\CompositeException;
 use PhPhD\ExceptionalValidation\Tests\Stub\Exception\ConditionallyCapturedException;
 use PhPhD\ExceptionalValidation\Tests\Stub\Exception\NestedItemCapturedException;
 use PhPhD\ExceptionalValidation\Tests\Stub\Exception\NestedPropertyCapturableException;
@@ -54,7 +54,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\MatchByExceptionClassCondition
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\MatchWithClosureCondition
  * @covers \PhPhD\ExceptionalValidation\Model\Condition\CompositeMatchCondition
- * @covers \PhPhD\ExceptionalValidation\Model\Exception\ProcessedException
+ * @covers \PhPhD\ExceptionalValidation\Model\Exception\CapturedException
  * @covers \PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath
  * @covers \PhPhD\ExceptionalValidation\Model\Exception\ExceptionPackage
  * @covers \PhPhD\ExceptionalValidation\Assembler\CompositeRuleSetAssembler

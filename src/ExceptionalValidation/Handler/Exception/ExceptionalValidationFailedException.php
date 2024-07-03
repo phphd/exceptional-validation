@@ -10,6 +10,7 @@ use Throwable;
 
 use function sprintf;
 
+/** @api */
 final class ExceptionalValidationFailedException extends RuntimeException
 {
     public function __construct(

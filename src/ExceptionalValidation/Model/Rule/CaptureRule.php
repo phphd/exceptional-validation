@@ -7,6 +7,7 @@ namespace PhPhD\ExceptionalValidation\Model\Rule;
 use PhPhD\ExceptionalValidation\Model\Exception\ExceptionPackage;
 use PhPhD\ExceptionalValidation\Model\ValueObject\PropertyPath;
 
+/** @internal */
 interface CaptureRule
 {
     public function process(ExceptionPackage $exceptions): bool;

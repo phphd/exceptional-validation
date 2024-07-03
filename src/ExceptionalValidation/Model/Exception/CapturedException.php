@@ -8,7 +8,7 @@ use PhPhD\ExceptionalValidation\Model\Rule\CaptureExceptionRule;
 use Throwable;
 
 /** @api */
-final class ProcessedException
+final class CapturedException
 {
     public function __construct(
         private readonly Throwable $exception,
