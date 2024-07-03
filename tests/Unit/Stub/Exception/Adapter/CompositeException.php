@@ -2,22 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PhPhD\ExceptionalValidation\Model\Exception;
+namespace PhPhD\ExceptionalValidation\Tests\Stub\Exception\Adapter;
 
+use PhPhD\ExceptionalValidation\Model\Exception\Adapter\ThrownException;
 use RuntimeException;
 use Throwable;
 
-/** @api */
+/** @internal */
 final class CompositeException extends RuntimeException implements ThrownException
 {
     public function __construct(
         /** @var list<Throwable> */
         private readonly array $exceptions,
-        string $message = '',
-        int $code = 0,
-        ?Throwable $previous = null,
     ) {
-        parent::__construct($message, $code, $previous);
+        parent::__construct();
     }
 
     public function getExceptions(): array

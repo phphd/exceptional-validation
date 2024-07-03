@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhPhD\ExceptionalValidation\Model\Exception;
 
+use PhPhD\ExceptionalValidation\Model\Exception\Adapter\ThrownException;
 use PhPhD\ExceptionalValidation\Model\Rule\CaptureExceptionRule;
 use Throwable;
 use Webmozart\Assert\Assert;

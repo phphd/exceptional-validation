@@ -7,8 +7,8 @@ namespace PhPhD\ExceptionalValidation\Handler;
 use PhPhD\ExceptionalValidation\Assembler\Object\ObjectRuleSetAssembler;
 use PhPhD\ExceptionalValidation\Formatter\ExceptionViolationListFormatter;
 use PhPhD\ExceptionalValidation\Handler\Exception\ExceptionalValidationFailedException;
+use PhPhD\ExceptionalValidation\Model\Exception\Adapter\ThrownException;
 use PhPhD\ExceptionalValidation\Model\Exception\ExceptionPackage;
-use PhPhD\ExceptionalValidation\Model\Exception\ThrownException;
 
 /** @internal */
 final class ExceptionalHandler implements ExceptionHandler

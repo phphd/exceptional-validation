@@ -22,7 +22,7 @@ use PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationFormatter;
 use PhPhD\ExceptionalValidation\Formatter\ExceptionalViolationListFormatter;
 use PhPhD\ExceptionalValidation\Handler\Exception\ExceptionalValidationFailedException;
 use PhPhD\ExceptionalValidation\Handler\ExceptionalHandler;
-use PhPhD\ExceptionalValidation\Model\Exception\CompositeException;
+use PhPhD\ExceptionalValidation\Tests\Stub\Exception\Adapter\CompositeException;
 use PhPhD\ExceptionalValidation\Tests\Stub\Exception\ConditionallyCapturedException;
 use PhPhD\ExceptionalValidation\Tests\Stub\Exception\NestedItemCapturedException;
 use PhPhD\ExceptionalValidation\Tests\Stub\Exception\NestedPropertyCapturableException;

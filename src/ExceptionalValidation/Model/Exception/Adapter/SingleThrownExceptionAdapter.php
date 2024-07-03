@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhPhD\ExceptionalValidation\Model\Exception;
+namespace PhPhD\ExceptionalValidation\Model\Exception\Adapter;
 
 use RuntimeException;
 use Throwable;
