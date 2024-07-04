@@ -74,14 +74,14 @@ throws an `ExceptionalValidationFailedException`.
 Therefore, it's possible to catch it and process it as needed:
 
 ```php
-$command = new CreateVacationRequestCommand($startDate, $daysCount, /*...*/);
+$command = new RegisterUserCommand($login, $password);
 
 try {
     $this->commandBus->dispatch($command);
 } catch (ExceptionalValidationFailedException $exception) {
     $constraintViolationList = $exception->getViolations();
 
-    return $this->render('vacationForm.html.twig', ['errors' => $constraintViolationList]);
+    return $this->render('registrationForm.html.twig', ['errors' => $constraintViolationList]);
 } 
 ```
 
