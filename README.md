@@ -210,29 +210,24 @@ In this example, when `InsufficientStockException` is captured, it will be mappe
 property, where `*` stands for the index of the particular `ProductDetails` instance from the `products` array on which
 the exception was captured.
 
+## Limitations
+
+### Custom translation parameters
+
+Currently, the bundle supports only one way to format violations - that is a single translation message.
+It is not yet possible to pass custom parameters to the translation message.
+
 ### Capturing multiple exceptions at once
 
-Typically, validation involves evaluating multiple conditions simultaneously, allowing user to see all the validation
-errors in one go, rather than seeing just the first error as in case of standard exception handling.
+Typically, validation process is expected to capture all errors at once and return them as a list of violations.
+However, the whole concept of exceptional processing in PHP is based on the idea that only one exception is thrown at a
+time, since only one instruction is executed at a time.
 
-Current component partially mitigates this issue by allowing to capture multiple exceptions at once.
-The key idea involves using some kind of `CompositeException` that represents an array of other exceptions.
+In case of Symfony Messenger, it is partially overcome by the fact that `HandlerFailedException` can wrap multiple
+exceptions collected from the underlying handlers. Though, currently there's no way to collect more than one
+exception from the same handler because of the limitations of sequential computing model.
 
-Here is an example of how you can achieve this:
-
-Then, your handler could throw any kind of composite exception:
-
-```php
-throw new CompositeException([
-    new EmailAlreadyExistsException('test@test.com'),
-    new PasswordTooShortException('test'),
-])
-```
-
-This way, all these exceptions will be captured and mapped to the corresponding properties on `RegisterUserCommand`.
-
-If any of wrapped exceptions are not processed, then original `CompositeException` will be re-thrown, regardless of how
-many exceptions were successfully mapped.
-
-> Since this bundle integrates with Symfony Messenger component, you can use `HandlerFailedException` as well
-
+We are currently working on this issue and trying to implement a solution that will allow capturing multiple exceptions.
+Most likely the solution will be based on some ideas from the system of interaction combinators, where code is no longer
+considered as a sequence of instructions, but rather as a graph of interactions that are combined and reduced on each
+step.

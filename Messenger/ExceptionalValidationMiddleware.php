@@ -14,7 +14,7 @@ use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface;
 use Throwable;
 
-/** @api */
+/** @internal */
 final class ExceptionalValidationMiddleware implements MiddlewareInterface
 {
     public function __construct(
